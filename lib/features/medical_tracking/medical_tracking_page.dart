@@ -9,6 +9,8 @@ import 'models/medical_record.dart';
 class MedicalTrackingPage extends StatelessWidget {
   const MedicalTrackingPage({super.key});
 
+  MedicalTrackingController get _controller => MedicalTrackingController.instance;
+
   Future<void> _showRecordSheet(
     BuildContext context, {
     MedicalRecord? initialRecord,
@@ -26,22 +28,24 @@ class MedicalTrackingPage extends StatelessWidget {
       ),
     );
 
-    if (record != null) {
-      if (recordIndex == null) {
-        MedicalTrackingController.instance.addRecord(record);
-      } else {
-        MedicalTrackingController.instance.updateRecord(recordIndex, record);
-      }
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            recordIndex == null
-                ? 'Registro adicionado com sucesso'
-                : 'Registro atualizado com sucesso',
-          ),
-        ),
-      );
+    if (record == null) return;
+
+    if (recordIndex == null) {
+      _controller.addRecord(record);
+    } else {
+      _controller.updateRecord(recordIndex, record);
     }
+
+    if (!context.mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          recordIndex == null
+              ? 'Registro adicionado com sucesso'
+              : 'Registro atualizado com sucesso',
+        ),
+      ),
+    );
   }
 
   @override
@@ -49,7 +53,6 @@ class MedicalTrackingPage extends StatelessWidget {
     final theme = Theme.of(context);
     final textColor = theme.colorScheme.onSurface;
     final secondaryColor = theme.textTheme.bodySmall?.color ?? Colors.grey;
-    final controller = MedicalTrackingController.instance;
 
     return Scaffold(
       body: SafeArea(
@@ -92,18 +95,21 @@ class MedicalTrackingPage extends StatelessWidget {
                 Divider(height: 1, color: theme.dividerColor),
                 Expanded(
                   child: AnimatedBuilder(
-                    animation: controller,
+                    animation: _controller,
                     builder: (context, _) {
+                      final records = _controller.records;
+
                       return ListView.builder(
                         padding: const EdgeInsets.fromLTRB(18, 18, 18, 22),
-                        itemCount: controller.records.length + 1,
+                        itemCount: records.length + 1,
                         itemBuilder: (context, index) {
                           if (index == 0) {
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 _HealthLevelCard(
-                                  dailyHealthLevel: controller.dailyHealthLevel,
+                                  dailyHealthLevel: _controller.dailyHealthLevel,
+                                  onChanged: _controller.updateDailyHealthLevel,
                                 ),
                                 const SizedBox(height: 16),
                                 PrimaryButton(
@@ -136,13 +142,15 @@ class MedicalTrackingPage extends StatelessWidget {
                             );
                           }
 
-                          final record = controller.records[index - 1];
+                          final recordIndex = index - 1;
+                          final record = records[recordIndex];
+
                           return _MedicalRecordCard(
                             record: record,
                             onTap: () => _showRecordSheet(
                               context,
                               initialRecord: record,
-                              recordIndex: index - 1,
+                              recordIndex: recordIndex,
                             ),
                           );
                         },
@@ -160,9 +168,13 @@ class MedicalTrackingPage extends StatelessWidget {
 }
 
 class _HealthLevelCard extends StatelessWidget {
-  const _HealthLevelCard({required this.dailyHealthLevel});
+  const _HealthLevelCard({
+    required this.dailyHealthLevel,
+    required this.onChanged,
+  });
 
   final double dailyHealthLevel;
+  final ValueChanged<double> onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -210,7 +222,24 @@ class _HealthLevelCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 12),
+          Text(
+            'Arraste para ajustar o acompanhamento do dia.',
+            style: TextStyle(
+              color: secondaryColor,
+              fontSize: 13,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          Slider(
+            value: dailyHealthLevel,
+            min: 0,
+            max: 5,
+            divisions: 10,
+            label: dailyHealthLevel.toStringAsFixed(1),
+            activeColor: theme.colorScheme.primary,
+            onChanged: onChanged,
+          ),
           Text(
             'Baseado nos registros de humor, sono, alimentação e medicação.',
             style: TextStyle(
@@ -413,6 +442,7 @@ class _AddMedicalRecordSheetState extends State<_AddMedicalRecordSheet> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textColor = theme.colorScheme.onSurface;
+    final isEditing = widget.initialRecord != null;
 
     return Padding(
       padding: EdgeInsets.only(
@@ -429,7 +459,7 @@ class _AddMedicalRecordSheetState extends State<_AddMedicalRecordSheet> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Adicionar registro',
+                isEditing ? 'Editar registro' : 'Adicionar registro',
                 style: TextStyle(
                   color: textColor,
                   fontSize: 20,

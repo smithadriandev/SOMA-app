@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../features/accident_alert/accident_alert_page.dart';
+import '../features/accessibility/accessibility_page.dart';
+import '../features/about/about_page.dart';
 import '../features/auth/forgot_password_code_page.dart';
 import '../features/auth/forgot_password_email_page.dart';
 import '../features/auth/forgot_password_new_password_page.dart';
@@ -11,7 +13,9 @@ import '../features/connections/add_connection_page.dart';
 import '../features/connections/connections_page.dart';
 import '../features/daily_tasks/daily_tasks_page.dart';
 import '../features/home/home_page.dart';
+import '../features/help/help_page.dart';
 import '../features/medical_tracking/medical_tracking_page.dart';
+import '../features/medicine_search/medicine_search_page.dart';
 import '../features/pharmacies/pharmacies_map_page.dart';
 import '../features/settings/settings_page.dart';
 import '../features/splash/splash_page.dart';
@@ -33,6 +37,10 @@ class AppRoutes {
   static const dailyTasks = '/daily-tasks';
   static const medicalTracking = '/medical-tracking';
   static const accidentAlert = '/accident-alert';
+  static const about = '/about';
+  static const medicineSearch = '/medicine-search';
+  static const accessibility = '/accessibility';
+  static const help = '/help';
 
   static Map<String, WidgetBuilder> get routes => {
         splash: (_) => const SplashPage(),
@@ -51,5 +59,10 @@ class AppRoutes {
         dailyTasks: (_) => const DailyTasksPage(),
         medicalTracking: (_) => const MedicalTrackingPage(),
         accidentAlert: (_) => const AccidentAlertPage(),
+        about: (_) => const AboutPage(),
+        medicineSearch: (_) => const MedicineSearchPage(),
+        accessibility: (_) => const AccessibilityPage(),
+        help: (_) => const HelpPage(),
       };
 }
+

@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
     final medicalTrackingController = MedicalTrackingController.instance;
 
     return Scaffold(
-      drawer: const HomeSidebar(),
+      endDrawer: const HomeSidebar(),
       body: SafeArea(
         child: Center(
           child: ConstrainedBox(
@@ -38,7 +38,7 @@ class HomePage extends StatelessWidget {
                     Builder(
                       builder: (context) {
                         return HomeHeader(
-                          onProfileTap: () => Scaffold.of(context).openDrawer(),
+                          onProfileTap: () => Scaffold.of(context).openEndDrawer(),
                         );
                       },
                     ),
@@ -145,3 +145,4 @@ class _AlertButton extends StatelessWidget {
     );
   }
 }
+

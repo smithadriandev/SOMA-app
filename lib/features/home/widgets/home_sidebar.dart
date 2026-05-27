@@ -5,12 +5,6 @@ import '../../../app/routes.dart';
 class HomeSidebar extends StatelessWidget {
   const HomeSidebar({super.key});
 
-  void _showItemMessage(BuildContext context, String label) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(label)),
-    );
-  }
-
   void _logout(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(
       context,
@@ -62,7 +56,7 @@ class HomeSidebar extends StatelessWidget {
                   ),
                   const SizedBox(width: 28),
                   Text(
-                    'Usuário',
+                    'Usu\u00E1rio',
                     style: TextStyle(
                       color: textColor,
                       fontSize: 18,
@@ -75,24 +69,24 @@ class HomeSidebar extends StatelessWidget {
             ),
             Divider(height: 1, color: theme.dividerColor),
             _SidebarItem(
-              label: 'Sobre nós',
+              label: 'Sobre n\u00F3s',
               icon: Icons.groups_2_outlined,
-              onTap: () => _showItemMessage(context, 'Sobre nós'),
+              onTap: () => _openRoute(context, AppRoutes.about),
             ),
             _SidebarItem(
-              label: 'Conexões',
+              label: 'Conex\u00F5es',
               icon: Icons.contact_phone_outlined,
               onTap: () => _openRoute(context, AppRoutes.connections),
             ),
             _SidebarItem(
-              label: 'Configurações',
+              label: 'Configura\u00E7\u00F5es',
               icon: Icons.settings,
               onTap: () => _openRoute(context, AppRoutes.settings),
             ),
             _SidebarItem(
               label: 'Acessibilidade',
               icon: Icons.accessibility_new,
-              onTap: () => _showItemMessage(context, 'Acessibilidade'),
+              onTap: () => _openRoute(context, AppRoutes.accessibility),
             ),
             const Spacer(),
             Padding(

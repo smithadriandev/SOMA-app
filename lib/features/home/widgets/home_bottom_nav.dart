@@ -23,17 +23,29 @@ class HomeBottomNav extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           _BottomNavIcon(
-            icon: Icons.settings_outlined,
+            icon: Icons.home_outlined,
             color: SomaColors.primaryBlue,
-            onTap: () => Navigator.pushNamed(context, AppRoutes.settings),
+            onTap: () => Navigator.pushNamedAndRemoveUntil(
+              context,
+              AppRoutes.home,
+              (route) => false,
+            ),
           ),
           _BottomNavIcon(
             icon: Icons.public_outlined,
             color: iconColor,
             onTap: () => Navigator.pushNamed(context, AppRoutes.pharmaciesMap),
           ),
-          _BottomNavIcon(icon: Icons.smart_toy_outlined, color: iconColor),
-          _BottomNavIcon(icon: Icons.help_outline, color: iconColor),
+          _BottomNavIcon(
+            icon: Icons.medication_outlined,
+            color: iconColor,
+            onTap: () => Navigator.pushNamed(context, AppRoutes.medicineSearch),
+          ),
+          _BottomNavIcon(
+            icon: Icons.help_outline,
+            color: iconColor,
+            onTap: () => Navigator.pushNamed(context, AppRoutes.help),
+          ),
         ],
       ),
     );
@@ -63,3 +75,5 @@ class _BottomNavIcon extends StatelessWidget {
     );
   }
 }
+
+

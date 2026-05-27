@@ -20,6 +20,20 @@ class MedicalRecord {
   final String description;
   final MedicalImpact impact;
 
+  MedicalRecord copyWith({
+    String? dateTimeText,
+    String? type,
+    String? description,
+    MedicalImpact? impact,
+  }) {
+    return MedicalRecord(
+      dateTimeText: dateTimeText ?? this.dateTimeText,
+      type: type ?? this.type,
+      description: description ?? this.description,
+      impact: impact ?? this.impact,
+    );
+  }
+
   String get impactLabel {
     return switch (impact) {
       MedicalImpact.positive => 'positivo',

@@ -16,3 +16,5 @@ ios/Flutter/ephemeral/
 
 macos/Pods/
 macos/Runner.xcworkspace/
+
+android/.kotlin/
