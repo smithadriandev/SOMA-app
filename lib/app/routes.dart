@@ -1,68 +1,102 @@
 import 'package:flutter/material.dart';
 
-import '../features/accident_alert/accident_alert_page.dart';
-import '../features/accessibility/accessibility_page.dart';
-import '../features/about/about_page.dart';
-import '../features/auth/forgot_password_code_page.dart';
-import '../features/auth/forgot_password_email_page.dart';
-import '../features/auth/forgot_password_new_password_page.dart';
-import '../features/auth/forgot_password_success_page.dart';
-import '../features/auth/login_page.dart';
-import '../features/auth/register_page.dart';
-import '../features/connections/add_connection_page.dart';
-import '../features/connections/connections_page.dart';
-import '../features/daily_tasks/daily_tasks_page.dart';
-import '../features/home/home_page.dart';
-import '../features/help/help_page.dart';
-import '../features/medical_tracking/medical_tracking_page.dart';
-import '../features/medicine_search/medicine_search_page.dart';
-import '../features/pharmacies/pharmacies_map_page.dart';
-import '../features/settings/settings_page.dart';
+import '../features/alerta_acidente/pagina_alerta_acidente.dart';
+import '../features/acessibilidade/pagina_acessibilidade.dart';
+import '../features/acompanhamento_medico/pagina_acompanhamento_medico.dart';
+import '../features/ajuda/pagina_ajuda.dart';
+import '../features/autenticacao/login_page.dart';
+import '../features/autenticacao/pagina_cadastro.dart';
+import '../features/autenticacao/pagina_codigo_recuperacao.dart';
+import '../features/autenticacao/pagina_nova_senha.dart';
+import '../features/autenticacao/pagina_recuperar_senha_email.dart';
+import '../features/autenticacao/pagina_senha_sucesso.dart';
+import '../features/busca_medicamentos/pagina_busca_medicamentos.dart';
+import '../features/conexoes/pagina_adicionar_conexao.dart';
+import '../features/conexoes/pagina_conexoes.dart';
+import '../features/configuracoes/pagina_configuracoes.dart';
+import '../features/farmacias/pagina_mapa_farmacias.dart';
+import '../features/inicio/pagina_inicio.dart';
+import '../features/sobre/pagina_sobre.dart';
 import '../features/splash/splash_page.dart';
+import '../features/tarefas_diarias/pagina_tarefas_diarias.dart';
 
-class AppRoutes {
+class RotasApp {
   static const splash = '/splash';
   static const login = '/login';
-  static const register = '/register';
-  static const forgotPassword = '/forgot-password';
-  static const forgotPasswordEmail = '/forgot-password-email';
-  static const forgotPasswordCode = '/forgot-password-code';
-  static const forgotPasswordNewPassword = '/forgot-password-new-password';
-  static const forgotPasswordSuccess = '/forgot-password-success';
-  static const home = '/home';
-  static const connections = '/connections';
-  static const addConnection = '/add-connection';
-  static const settings = '/settings';
-  static const pharmaciesMap = '/pharmacies-map';
-  static const dailyTasks = '/daily-tasks';
-  static const medicalTracking = '/medical-tracking';
-  static const accidentAlert = '/accident-alert';
-  static const about = '/about';
-  static const medicineSearch = '/medicine-search';
-  static const accessibility = '/accessibility';
-  static const help = '/help';
+  static const cadastro = '/cadastro';
+  static const recuperarSenha = '/recuperar-senha-email';
+  static const recuperarSenhaEmail = '/recuperar-senha-email';
+  static const codigoRecuperacao = '/codigo-recuperacao';
+  static const novaSenha = '/nova-senha';
+  static const senhaAlterada = '/senha-alterada';
+  static const inicio = '/inicio';
+  static const sobre = '/sobre';
+  static const acessibilidade = '/acessibilidade';
+  static const configuracoes = '/configuracoes';
+  static const conexoes = '/conexoes';
+  static const adicionarConexao = '/adicionar-conexao';
+  static const tarefasDiarias = '/tarefas-diarias';
+  static const acompanhamentoMedico = '/acompanhamento-medico';
+  static const buscarMedicamento = '/buscar-medicamento';
+  static const mapaFarmacias = '/mapa-farmacias';
+  static const alertaAcidente = '/alerta-acidente';
+  static const ajuda = '/ajuda';
+
+  // Aliases antigos mantidos para evitar quebra de links internos antigos.
+  static const register = cadastro;
+  static const forgotPassword = recuperarSenha;
+  static const forgotPasswordEmail = recuperarSenhaEmail;
+  static const forgotPasswordCode = codigoRecuperacao;
+  static const forgotPasswordNewPassword = novaSenha;
+  static const forgotPasswordSuccess = senhaAlterada;
+  static const home = inicio;
+  static const settings = configuracoes;
+  static const pharmaciesMap = mapaFarmacias;
+  static const dailyTasks = tarefasDiarias;
+  static const medicalTracking = acompanhamentoMedico;
+  static const accidentAlert = alertaAcidente;
+  static const about = sobre;
+  static const medicineSearch = buscarMedicamento;
+  static const accessibility = acessibilidade;
+  static const help = ajuda;
 
   static Map<String, WidgetBuilder> get routes => {
-        splash: (_) => const SplashPage(),
-        login: (_) => const LoginPage(),
-        register: (_) => const RegisterPage(),
-        forgotPassword: (_) => const ForgotPasswordEmailPage(),
-        forgotPasswordEmail: (_) => const ForgotPasswordEmailPage(),
-        forgotPasswordCode: (_) => const ForgotPasswordCodePage(),
-        forgotPasswordNewPassword: (_) => const ForgotPasswordNewPasswordPage(),
-        forgotPasswordSuccess: (_) => const ForgotPasswordSuccessPage(),
-        home: (_) => const HomePage(),
-        connections: (_) => const ConnectionsPage(),
-        addConnection: (_) => const AddConnectionPage(),
-        settings: (_) => const SettingsPage(),
-        pharmaciesMap: (_) => const PharmaciesMapPage(),
-        dailyTasks: (_) => const DailyTasksPage(),
-        medicalTracking: (_) => const MedicalTrackingPage(),
-        accidentAlert: (_) => const AccidentAlertPage(),
-        about: (_) => const AboutPage(),
-        medicineSearch: (_) => const MedicineSearchPage(),
-        accessibility: (_) => const AccessibilityPage(),
-        help: (_) => const HelpPage(),
+        splash: (_) => const PaginaSplash(),
+        login: (_) => const PaginaLogin(),
+        cadastro: (_) => const PaginaCadastro(),
+        recuperarSenhaEmail: (_) => const PaginaRecuperarSenhaEmail(),
+        codigoRecuperacao: (_) => const PaginaCodigoRecuperacao(),
+        novaSenha: (_) => const PaginaNovaSenha(),
+        senhaAlterada: (_) => const PaginaSenhaSucesso(),
+        inicio: (_) => const PaginaInicio(),
+        sobre: (_) => const PaginaSobre(),
+        acessibilidade: (_) => const PaginaAcessibilidade(),
+        configuracoes: (_) => const PaginaConfiguracoes(),
+        conexoes: (_) => const PaginaConexoes(),
+        adicionarConexao: (_) => const PaginaAdicionarConexao(),
+        tarefasDiarias: (_) => const PaginaTarefasDiarias(),
+        acompanhamentoMedico: (_) => const PaginaAcompanhamentoMedico(),
+        buscarMedicamento: (_) => const PaginaBuscaMedicamentos(),
+        mapaFarmacias: (_) => const PaginaMapaFarmacias(),
+        alertaAcidente: (_) => const PaginaAlertaAcidente(),
+        ajuda: (_) => const PaginaAjuda(),
+        '/register': (_) => const PaginaCadastro(),
+        '/forgot-password': (_) => const PaginaRecuperarSenhaEmail(),
+        '/forgot-password-email': (_) => const PaginaRecuperarSenhaEmail(),
+        '/forgot-password-code': (_) => const PaginaCodigoRecuperacao(),
+        '/forgot-password-new-password': (_) => const PaginaNovaSenha(),
+        '/forgot-password-success': (_) => const PaginaSenhaSucesso(),
+        '/home': (_) => const PaginaInicio(),
+        '/about': (_) => const PaginaSobre(),
+        '/accessibility': (_) => const PaginaAcessibilidade(),
+        '/settings': (_) => const PaginaConfiguracoes(),
+        '/connections': (_) => const PaginaConexoes(),
+        '/add-connection': (_) => const PaginaAdicionarConexao(),
+        '/daily-tasks': (_) => const PaginaTarefasDiarias(),
+        '/medical-tracking': (_) => const PaginaAcompanhamentoMedico(),
+        '/medicine-search': (_) => const PaginaBuscaMedicamentos(),
+        '/pharmacies-map': (_) => const PaginaMapaFarmacias(),
+        '/accident-alert': (_) => const PaginaAlertaAcidente(),
+        '/help': (_) => const PaginaAjuda(),
       };
 }
-

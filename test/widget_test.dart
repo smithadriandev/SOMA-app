@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:soma/app/app.dart';
-import 'package:soma/shared/widgets/soma_logo.dart';
+import 'package:soma/shared/widgets/logo_soma.dart';
 
 void main() {
   testWidgets('Soma opens splash and navigates to login', (
@@ -9,7 +9,7 @@ void main() {
   ) async {
     await tester.pumpWidget(const SomaApp());
 
-    expect(find.byType(SomaLogo), findsOneWidget);
+    expect(find.byType(LogoSoma), findsOneWidget);
 
     await tester.pump(const Duration(seconds: 3));
     await tester.pumpAndSettle();

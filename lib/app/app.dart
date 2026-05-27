@@ -1,38 +1,38 @@
 import 'package:flutter/material.dart';
 
-import '../features/accessibility/controllers/accessibility_controller.dart';
+import '../features/acessibilidade/controllers/controlador_acessibilidade.dart';
 import 'routes.dart';
 import 'theme.dart';
-import 'theme_controller.dart';
+import 'controlador_tema.dart';
 
 class SomaApp extends StatelessWidget {
   const SomaApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final accessibility = AccessibilityController.instance;
+    final acessibilidade = ControladorAcessibilidade.instance;
 
     return AnimatedBuilder(
       animation: Listenable.merge([
-        ThemeController.isDarkMode,
-        accessibility,
+        ControladorTema.modoEscuroAtivo,
+        acessibilidade,
       ]),
       builder: (context, _) {
-        final isDarkMode = ThemeController.isDarkMode.value;
+        final modoEscuro = ControladorTema.modoEscuroAtivo.value;
 
         return MaterialApp(
           title: 'Soma',
           debugShowCheckedModeBanner: false,
           theme: SomaTheme.light,
           darkTheme: SomaTheme.dark,
-          themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
-          initialRoute: AppRoutes.splash,
-          routes: AppRoutes.routes,
+          themeMode: modoEscuro ? ThemeMode.dark : ThemeMode.light,
+          initialRoute: RotasApp.splash,
+          routes: RotasApp.routes,
           builder: (context, child) {
             final mediaQuery = MediaQuery.of(context);
             return MediaQuery(
               data: mediaQuery.copyWith(
-                textScaler: TextScaler.linear(accessibility.textScale),
+                textScaler: TextScaler.linear(acessibilidade.escalaTexto),
               ),
               child: child ?? const SizedBox.shrink(),
             );
