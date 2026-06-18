@@ -9,6 +9,13 @@ class MockConexoes {
       secondPhone: '(79) 98888-0002',
       cpf: '12345678900',
     ),
+    Conexao(
+      name: 'Maria Mendes',
+      phone: '(79) 99999-0002',
+      relationship: 'Cuidadora',
+      secondPhone: '',
+      cpf: '98765432100',
+    ),
   ];
 
   static void adicionarConexao(Conexao connection) {

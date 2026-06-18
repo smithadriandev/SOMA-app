@@ -37,8 +37,8 @@ class RegistroMedico {
   String get impactLabel {
     return switch (impact) {
       ImpactoMedico.positive => 'positivo',
-      ImpactoMedico.attention => 'atenção',
-      ImpactoMedico.critical => 'crítico',
+      ImpactoMedico.attention => 'aten\u00E7\u00E3o',
+      ImpactoMedico.critical => 'cr\u00EDtico',
       ImpactoMedico.neutral => 'neutro',
     };
   }
@@ -49,7 +49,7 @@ class RegistroMedico {
       'Sintoma' => Icons.sick_outlined,
       'Humor' => Icons.mood_outlined,
       'Sono' => Icons.bedtime_outlined,
-      'Alimentação' => Icons.restaurant_outlined,
+      'Alimenta\u00E7\u00E3o' => Icons.restaurant_outlined,
       'Sinais vitais' => Icons.monitor_heart_outlined,
       'Consulta' => Icons.event_note_outlined,
       _ => Icons.health_and_safety_outlined,

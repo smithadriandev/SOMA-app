@@ -21,6 +21,7 @@ class PaginaInicio extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textColor = theme.colorScheme.onSurface;
+    final secondaryColor = theme.textTheme.bodySmall?.color ?? textColor;
     final dailyTasksController = ControladorTarefasDiarias.instance;
     final medicalTrackingController = ControladorAcompanhamentoMedico.instance;
 
@@ -38,7 +39,8 @@ class PaginaInicio extends StatelessWidget {
                     Builder(
                       builder: (context) {
                         return CabecalhoInicio(
-                          onProfileTap: () => Scaffold.of(context).openEndDrawer(),
+                          onProfileTap: () =>
+                              Scaffold.of(context).openEndDrawer(),
                         );
                       },
                     ),
@@ -57,7 +59,17 @@ class PaginaInicio extends StatelessWidget {
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
-                            const SizedBox(height: 28),
+                            const SizedBox(height: 8),
+                            Text(
+                              'Organize a rotina, acompanhe a sa\u00FAde e acesse ajuda rapidamente.',
+                              style: TextStyle(
+                                color: secondaryColor,
+                                fontSize: 13,
+                                fontWeight: FontWeight.w500,
+                                height: 1.35,
+                              ),
+                            ),
+                            const SizedBox(height: 26),
                             AnimatedBuilder(
                               animation: medicalTrackingController,
                               builder: (context, _) {
@@ -145,4 +157,3 @@ class _BotaoAlerta extends StatelessWidget {
     );
   }
 }
-

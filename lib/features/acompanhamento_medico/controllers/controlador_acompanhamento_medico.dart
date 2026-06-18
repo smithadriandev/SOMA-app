@@ -12,7 +12,7 @@ class ControladorAcompanhamentoMedico extends ChangeNotifier {
     const RegistroMedico(
       dateTimeText: 'Hoje - 08:00',
       type: 'Medicamento',
-      description: 'Remédio da manhã tomado corretamente',
+      description: 'Rem\u00E9dio da manh\u00E3 tomado corretamente',
       impact: ImpactoMedico.positive,
     ),
     const RegistroMedico(
@@ -23,8 +23,8 @@ class ControladorAcompanhamentoMedico extends ChangeNotifier {
     ),
     const RegistroMedico(
       dateTimeText: 'Hoje - 12:15',
-      type: 'Alimentação',
-      description: 'Almoçou bem e bebeu água',
+      type: 'Alimenta\u00E7\u00E3o',
+      description: 'Almo\u00E7ou bem e bebeu \u00E1gua',
       impact: ImpactoMedico.positive,
     ),
     const RegistroMedico(
@@ -36,18 +36,16 @@ class ControladorAcompanhamentoMedico extends ChangeNotifier {
     const RegistroMedico(
       dateTimeText: 'Ontem - 16:40',
       type: 'Sintoma',
-      description: 'Apresentou leve confusão mental',
+      description: 'Apresentou leve confus\u00E3o mental',
       impact: ImpactoMedico.attention,
     ),
   ];
 
-  double _nivelSaudeDia = 3.5;
-
   List<RegistroMedico> get registros => List.unmodifiable(_registros);
 
-  double get nivelSaudeDia => _nivelSaudeDia;
+  double get nivelSaudeDia => _calcularNivelSaudeDia();
 
-  String get textoNivelSaudeDia => _nivelSaudeDia.toStringAsFixed(1);
+  String get textoNivelSaudeDia => nivelSaudeDia.toStringAsFixed(1);
 
   void adicionarRegistro(RegistroMedico record) {
     _registros.insert(0, record);
@@ -72,13 +70,18 @@ class ControladorAcompanhamentoMedico extends ChangeNotifier {
     notifyListeners();
   }
 
-  void atualizarNivelSaudeDia(double value) {
-    final nextValue = value.clamp(0.0, 5.0).toDouble();
-    if (_nivelSaudeDia == nextValue) {
-      return;
+  double _calcularNivelSaudeDia() {
+    var nivel = 5.0;
+
+    for (final registro in _registros) {
+      nivel -= switch (registro.impact) {
+        ImpactoMedico.positive => 0.0,
+        ImpactoMedico.neutral => 0.1,
+        ImpactoMedico.attention => 0.4,
+        ImpactoMedico.critical => 0.8,
+      };
     }
 
-    _nivelSaudeDia = nextValue;
-    notifyListeners();
+    return nivel.clamp(0.0, 5.0).toDouble();
   }
 }

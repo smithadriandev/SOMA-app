@@ -41,7 +41,12 @@ class CampoTextoCustomizado extends StatelessWidget {
       keyboardType: keyboardType,
       textInputAction: textInputAction,
       inputFormatters: inputFormatters,
-      style: TextStyle(color: textColor, fontSize: 16),
+      style: TextStyle(
+        color: textColor,
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+      ),
+      cursorColor: theme.colorScheme.primary,
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: theme.inputDecorationTheme.hintStyle,
@@ -55,26 +60,11 @@ class CampoTextoCustomizado extends StatelessWidget {
           horizontal: 18,
           vertical: contentVerticalPadding,
         ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide.none,
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide.none,
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide.none,
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide.none,
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide.none,
-        ),
+        border: theme.inputDecorationTheme.border,
+        enabledBorder: theme.inputDecorationTheme.enabledBorder,
+        focusedBorder: theme.inputDecorationTheme.focusedBorder,
+        errorBorder: theme.inputDecorationTheme.errorBorder,
+        focusedErrorBorder: theme.inputDecorationTheme.focusedErrorBorder,
       ),
     );
   }

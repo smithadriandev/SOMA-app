@@ -10,7 +10,8 @@ class PaginaBuscaMedicamentos extends StatefulWidget {
   const PaginaBuscaMedicamentos({super.key});
 
   @override
-  State<PaginaBuscaMedicamentos> createState() => _PaginaBuscaMedicamentosState();
+  State<PaginaBuscaMedicamentos> createState() =>
+      _PaginaBuscaMedicamentosState();
 }
 
 class _PaginaBuscaMedicamentosState extends State<PaginaBuscaMedicamentos> {
@@ -166,7 +167,8 @@ class _PaginaBuscaMedicamentosState extends State<PaginaBuscaMedicamentos> {
                       Wrap(
                         spacing: 10,
                         runSpacing: 10,
-                        children: MockOfertasMedicamentos.medicamentosComuns.map(
+                        children:
+                            MockOfertasMedicamentos.medicamentosComuns.map(
                           (medicine) {
                             return ActionChip(
                               label: Text(medicine),
@@ -187,6 +189,25 @@ class _PaginaBuscaMedicamentosState extends State<PaginaBuscaMedicamentos> {
                             );
                           },
                         ).toList(),
+                      ),
+                      const SizedBox(height: 14),
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: theme.cardColor,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: theme.dividerColor),
+                        ),
+                        child: Text(
+                          'Prioridade indica a import\u00E2ncia do medicamento na rotina do paciente.',
+                          style: TextStyle(
+                            color: secondaryColor,
+                            fontSize: 12,
+                            height: 1.3,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
                       ),
                       if (_hasSearched) ...[
                         const SizedBox(height: 26),

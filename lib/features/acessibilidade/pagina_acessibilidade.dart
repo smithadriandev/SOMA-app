@@ -5,7 +5,8 @@ import 'controllers/controlador_acessibilidade.dart';
 class PaginaAcessibilidade extends StatelessWidget {
   const PaginaAcessibilidade({super.key});
 
-  ControladorAcessibilidade get _controller => ControladorAcessibilidade.instance;
+  ControladorAcessibilidade get _controller =>
+      ControladorAcessibilidade.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +60,8 @@ class PaginaAcessibilidade extends StatelessWidget {
                         children: [
                           _CardAcessibilidade(
                             title: 'Tamanho do texto',
-                            subtitle: 'Ajuste o tamanho das letras do aplicativo.',
+                            subtitle:
+                                'Ajuste o tamanho das letras do aplicativo.',
                             child: Wrap(
                               spacing: 10,
                               runSpacing: 10,
@@ -71,7 +73,7 @@ class PaginaAcessibilidade extends StatelessWidget {
                                   onSelected: _controller.definirEscalaTexto,
                                 ),
                                 _ChipEscalaTexto(
-                                  label: 'Médio',
+                                  label: 'M\u00E9dio',
                                   scale: 1.0,
                                   selectedScale: _controller.escalaTexto,
                                   onSelected: _controller.definirEscalaTexto,
@@ -83,6 +85,30 @@ class PaginaAcessibilidade extends StatelessWidget {
                                   onSelected: _controller.definirEscalaTexto,
                                 ),
                               ],
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          _CardAcessibilidade(
+                            title: 'Alto contraste',
+                            subtitle:
+                                'Refor\u00E7a bordas, cores e leitura dos textos.',
+                            child: SwitchListTile(
+                              contentPadding: EdgeInsets.zero,
+                              title: const Text('Ativar alto contraste'),
+                              value: _controller.altoContraste,
+                              onChanged: _controller.alternarAltoContraste,
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          _CardAcessibilidade(
+                            title: 'Bot\u00F5es maiores',
+                            subtitle:
+                                'Aumenta os bot\u00F5es principais para facilitar o toque.',
+                            child: SwitchListTile(
+                              contentPadding: EdgeInsets.zero,
+                              title: const Text('Usar bot\u00F5es maiores'),
+                              value: _controller.botoesMaiores,
+                              onChanged: _controller.alternarBotoesMaiores,
                             ),
                           ),
                         ],
@@ -121,6 +147,7 @@ class _CardAcessibilidade extends StatelessWidget {
       decoration: BoxDecoration(
         color: theme.cardColor,
         borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: theme.dividerColor.withValues(alpha: 0.75)),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.07),

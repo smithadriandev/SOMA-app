@@ -6,6 +6,7 @@ class OfertaMedicamento {
     required this.address,
     required this.latitude,
     required this.longitude,
+    required this.priority,
   });
 
   final String medicineName;
@@ -14,4 +15,19 @@ class OfertaMedicamento {
   final String address;
   final double latitude;
   final double longitude;
+  final PrioridadeMedicamento priority;
+
+  String get priorityLabel {
+    return switch (priority) {
+      PrioridadeMedicamento.high => 'Alta prioridade',
+      PrioridadeMedicamento.medium => 'M\u00E9dia prioridade',
+      PrioridadeMedicamento.low => 'Baixa prioridade',
+    };
+  }
+}
+
+enum PrioridadeMedicamento {
+  high,
+  medium,
+  low,
 }

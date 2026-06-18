@@ -5,12 +5,57 @@ import '../../../app/routes.dart';
 class MenuLateralInicio extends StatelessWidget {
   const MenuLateralInicio({super.key});
 
-  void _sair(BuildContext context) {
-    Navigator.pushNamedAndRemoveUntil(
-      context,
-      RotasApp.login,
-      (route) => false,
+  Future<void> _mostrarConfirmacaoSair(BuildContext context) async {
+    final confirmar = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) {
+        final theme = Theme.of(dialogContext);
+        final textColor = theme.colorScheme.onSurface;
+        final secondaryColor = theme.textTheme.bodySmall?.color ?? textColor;
+
+        return AlertDialog(
+          backgroundColor: theme.cardColor,
+          title: Text(
+            'Sair da conta?',
+            style: TextStyle(
+              color: textColor,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+          content: Text(
+            'Tem certeza que deseja sair da sua conta?',
+            style: TextStyle(
+              color: secondaryColor,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(dialogContext, false),
+              child: const Text('Cancelar'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(dialogContext, true),
+              child: const Text(
+                'Sair',
+                style: TextStyle(
+                  color: Color(0xFFD41717),
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
+
+    if (confirmar == true && context.mounted) {
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        RotasApp.login,
+        (route) => false,
+      );
+    }
   }
 
   void _abrirRota(BuildContext context, String route) {
@@ -79,6 +124,11 @@ class MenuLateralInicio extends StatelessWidget {
               onTap: () => _abrirRota(context, RotasApp.conexoes),
             ),
             _ItemMenuLateral(
+              label: 'Adicionar conex\u00E3o',
+              icon: Icons.add,
+              onTap: () => _abrirRota(context, RotasApp.adicionarConexao),
+            ),
+            _ItemMenuLateral(
               label: 'Configura\u00E7\u00F5es',
               icon: Icons.settings,
               onTap: () => _abrirRota(context, RotasApp.configuracoes),
@@ -92,7 +142,7 @@ class MenuLateralInicio extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(18, 0, 18, 24),
               child: InkWell(
-                onTap: () => _sair(context),
+                onTap: () => _mostrarConfirmacaoSair(context),
                 borderRadius: BorderRadius.circular(8),
                 child: Padding(
                   padding:

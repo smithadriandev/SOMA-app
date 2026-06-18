@@ -7,26 +7,31 @@ class PaginaAjuda extends StatelessWidget {
     _ItemAjuda(
       icon: Icons.touch_app_outlined,
       title: 'Como usar o Soma',
-      description: 'Conheça as principais áreas do aplicativo.',
-      content: 'Tarefas Diárias:\nUse para marcar atividades importantes da rotina.\n\nAcompanhamento Médico:\nUse para registrar humor, sono, medicação, sintomas e informações de saúde.\n\nConexões:\nCadastre familiares ou cuidadores de confiança.\n\nMapa:\nVeja farmácias próximas.\n\nEncontrar Medicamento:\nBusque medicamentos e veja ofertas em farmácias.\n\nAlerta:\nEnvie um alerta para contatos de emergência.',
+      description: 'Aprenda as fun\u00E7\u00F5es principais do app.',
+      content:
+          'Tarefas Di\u00E1rias:\nUse para marcar atividades importantes da rotina.\n\nAcompanhamento M\u00E9dico:\nUse para registrar humor, sono, medica\u00E7\u00E3o, sintomas e informa\u00E7\u00F5es de sa\u00FAde.\n\nConex\u00F5es:\nCadastre familiares ou cuidadores de confian\u00E7a.\n\nMapa:\nVeja farm\u00E1cias pr\u00F3ximas.\n\nEncontrar Medicamento:\nBusque medicamentos mockados e veja ofertas em farm\u00E1cias.\n\nAlerta:\nSimule o envio de alerta para contatos de emerg\u00EAncia.',
     ),
     _ItemAjuda(
       icon: Icons.volunteer_activism_outlined,
       title: 'Dicas para cuidadores',
-      description: 'Orientações simples para apoiar a rotina diária.',
-      content: 'Mantenha uma rotina diária simples.\n\nUse lembretes visuais.\n\nEvite mudanças bruscas no ambiente.\n\nFale com calma e use frases curtas.\n\nDeixe objetos importantes sempre no mesmo lugar.\n\nRegistre mudanças de humor, sono ou alimentação.',
+      description:
+          'Orienta\u00E7\u00F5es simples para apoiar a rotina di\u00E1ria.',
+      content:
+          'Mantenha uma rotina di\u00E1ria simples.\n\nUse lembretes visuais.\n\nEvite mudan\u00E7as bruscas no ambiente.\n\nFale com calma e use frases curtas.\n\nDeixe objetos importantes sempre no mesmo lugar.\n\nRegistre mudan\u00E7as de humor, sono ou alimenta\u00E7\u00E3o.',
     ),
     _ItemAjuda(
       icon: Icons.health_and_safety_outlined,
       title: 'Em caso de crise',
-      description: 'Passos de apoio para momentos de maior atenção.',
-      content: 'Mantenha a calma.\n\nFale devagar e com voz tranquila.\n\nEvite discutir ou corrigir de forma brusca.\n\nLeve a pessoa para um local seguro.\n\nEntre em contato com um cuidador ou familiar.\n\nEm caso de emergência real, ligue para o serviço de emergência.\n\nO Soma não substitui atendimento médico ou serviço de emergência.',
+      description: 'Passos de apoio para momentos de maior aten\u00E7\u00E3o.',
+      content:
+          'Mantenha a calma.\n\nFale devagar e com voz tranquila.\n\nEvite discutir ou corrigir de forma brusca.\n\nLeve a pessoa para um local seguro.\n\nEntre em contato com um cuidador ou familiar.\n\nEm caso de emerg\u00EAncia real, ligue para o servi\u00E7o de emerg\u00EAncia.\n\nO Soma n\u00E3o substitui atendimento m\u00E9dico ou servi\u00E7o de emerg\u00EAncia.',
     ),
     _ItemAjuda(
       icon: Icons.quiz_outlined,
       title: 'Perguntas frequentes',
-      description: 'Respostas rápidas para dúvidas comuns.',
-      content: 'Como cadastrar uma conexão?\nAcesse a sidebar e toque em “Adicionar conexão”.\n\nComo marcar uma tarefa?\nEntre em Tarefas Diárias e toque na tarefa desejada.\n\nComo ativar o tema escuro?\nAcesse Configurações e ative “Tema escuro”.\n\nComo encontrar farmácias?\nToque no ícone de mapa na barra inferior.\n\nComo buscar medicamentos?\nToque no ícone de farmácia na barra inferior.',
+      description: 'Respostas r\u00E1pidas para d\u00FAvidas comuns.',
+      content:
+          'Como cadastrar uma conex\u00E3o?\nAcesse a sidebar e toque em \u201CConex\u00F5es\u201D. Depois toque em \u201CAdicionar conex\u00E3o\u201D.\n\nComo marcar uma tarefa?\nEntre em Tarefas Di\u00E1rias e toque na tarefa desejada.\n\nComo ativar o tema escuro?\nAcesse Configura\u00E7\u00F5es e ative \u201CTema escuro\u201D.\n\nComo encontrar farm\u00E1cias?\nToque no \u00EDcone de mapa na barra inferior.\n\nComo buscar medicamentos?\nToque no \u00EDcone de medicamento na barra inferior.',
     ),
   ];
 
@@ -101,16 +106,20 @@ class _CardAjuda extends StatelessWidget {
     final theme = Theme.of(context);
     final textColor = theme.colorScheme.onSurface;
     final secondaryColor = theme.textTheme.bodySmall?.color ?? textColor;
+    final isDark = theme.brightness == Brightness.dark;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
         color: theme.cardColor,
         borderRadius: BorderRadius.circular(14),
+        border: Border.all(
+          color: theme.dividerColor.withValues(alpha: isDark ? 0.8 : 0.65),
+        ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.07),
-            blurRadius: 5,
+            color: Colors.black.withValues(alpha: isDark ? 0.16 : 0.06),
+            blurRadius: 6,
             offset: const Offset(0, 3),
           ),
         ],
@@ -119,12 +128,20 @@ class _CardAjuda extends StatelessWidget {
       child: Theme(
         data: theme.copyWith(dividerColor: Colors.transparent),
         child: ExpansionTile(
-          tilePadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+          tilePadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
           childrenPadding: const EdgeInsets.fromLTRB(18, 0, 18, 18),
-          leading: Icon(
-            item.icon,
-            color: theme.colorScheme.primary,
-            size: 30,
+          leading: Container(
+            width: 42,
+            height: 42,
+            decoration: BoxDecoration(
+              color: theme.colorScheme.primary.withValues(alpha: 0.14),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Icon(
+              item.icon,
+              color: theme.colorScheme.primary,
+              size: 27,
+            ),
           ),
           title: Text(
             item.title,
@@ -135,22 +152,57 @@ class _CardAjuda extends StatelessWidget {
             ),
           ),
           subtitle: Padding(
-            padding: const EdgeInsets.only(top: 4),
-            child: Text(
-              item.description,
-              style: TextStyle(
-                color: secondaryColor,
-                fontSize: 13,
-                height: 1.3,
-                fontWeight: FontWeight.w500,
-              ),
+            padding: const EdgeInsets.only(top: 6),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  item.description,
+                  style: TextStyle(
+                    color: secondaryColor,
+                    fontSize: 13,
+                    height: 1.3,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 7),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.touch_app_outlined,
+                      color: theme.colorScheme.primary,
+                      size: 15,
+                    ),
+                    const SizedBox(width: 5),
+                    Text(
+                      'Toque para ver mais',
+                      style: TextStyle(
+                        color: theme.colorScheme.primary,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
           iconColor: theme.colorScheme.primary,
-          collapsedIconColor: textColor,
+          collapsedIconColor: theme.colorScheme.primary,
+          expandedCrossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Align(
-              alignment: Alignment.centerLeft,
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                color: theme.scaffoldBackgroundColor.withValues(
+                  alpha: isDark ? 0.28 : 0.7,
+                ),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                    color: theme.dividerColor.withValues(alpha: 0.6)),
+              ),
               child: Text(
                 item.content,
                 style: TextStyle(
